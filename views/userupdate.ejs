@@ -1,0 +1,141 @@
+<!-- Übersicht anderer Benutzer -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+        <script src="/editCode/codemirror.js"></script>
+		<link rel="stylesheet" href="/editCode/codemirror.css">
+		<link rel="stylesheet" href="/editCode/ayu-mirage.css">
+        <script src="/editCode/javascript/javascript.js"></script>
+        <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - Benutzerliste</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Flex-Container für Seiten-Menü und Inhalt -->
+        <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+            <div id="menu" class="side-menu">
+                <div class="menu-hl">MENÜ</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                    <p class="menu-button"><a href="/my-profile">[ My Snippets ]</b></a></p>
+                    <p class="menu-button"><a href="/userlist">[ Other Users ]</b></a></p>
+                    <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                        <input type="hidden" name="userTab" value="<%= rows.loginname %>">
+                        <input type="submit" value="[ Favorites ]">
+                    </form>
+                    <p class="menu-button"><a href="/settings">[ Settings ]</b></a></p>
+                </div>
+                <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                </div>
+            </div>
+            <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                <div class="inner" style="justify-content: flex-start; width: 100%;">
+                    <div style="margin-left: 14%; width: 100%;">
+                        <h1 style="margin-left: 20px; margin-right: 20px;">Benutzer bearbeiten</h1>
+                        <p style="margin-left: 20px; margin-right: 20px;">Hier kannst du Nutzer bearbeiten.</p>
+                        <div>
+                            <!-- Formular zum bearbeiten des Nutzers-->
+                            <form action="/onupdate/<%=rows.id%>" method="POST" style="display: flex; flex-direction: column; margin: 25px 15px 25px 15px;">
+                                <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                    <label for="user" class="formlabel">User-/Loginname:</label>
+                                    <input class="forminput" id="loginname" type="text" name="loginname" value="<%=rows.loginname%>" oninput="checkName()" required>
+                                    <input type="hidden" name="oldLoginname" value="<%=rows.loginname%>">
+                                </div>
+                                <div class="error-msg loginname" style="display:none;">Nicht erlaubter Name.</div>
+                                <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                    <label for="password" class="formlabel">Passwort:</label>
+                                    <input class="forminput" id="password1" type="password" name="password" placeholder="mind. 8 Zeichen" oninput="checkPass()">
+                                    <!-- <input type="hidden" name="oldPasswordHash" value="<%=rows.password%>"> -->
+                                </div>
+                                <div class="error-msg password1">Passwort ist zu kurz.</div>
+                                <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                    <label for="email" class="formlabel">E-Mail:</label>
+                                    <input class="forminput" id="email" type="text" name="email" value="<%=rows.email%>" oninput="checkEmail()" required>
+                                </div>
+                                <div class="error-msg email">Bitte E-Mailadresse überprüfen.</div>
+                                <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                    <label for="role" class="formlabel">Rolle:</label>
+                                    <select id="role" name="role" style="margin: 0px;  height: 36px; width: 369px;">
+                                        <option id="role-admin" value="admin">admin</option>
+                                        <option id="role-editor" value="editor">editor</option>
+                                        <option id="role-user" value="user">user</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                    <label for="status" class="formlabel">Status:</label>
+                                    <select id="status" name="status" style="margin: 0px; height: 36px;  width: 369px;">
+                                        <option id="status1" value="1">1 - aktiv</option>
+                                        <option id="status2" value="2">2 - inaktiv</option>
+                                        <option id="status3" value="3">3 - gesperrt</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex; justify-content: center; margin: 25px;">
+                                    <button class="cta-button" type="submit" >Speichern</button>
+                                    <a href="/userlist" class="cta-button">Abbrechen</a>
+                                </div>
+                                <input class="forminput" type="hidden" name="id" value="<%=rows.id%>">
+                                <input class="forminput" type="hidden" name="favorites" value="/<%=rows.loginname%>">
+                            </form>
+                            <!-- Javascript, um Dropdown vorauszuwählen -->
+                            <!-- Quelle: https://www.daftlogic.com/information-programmatically-preselect-dropdown-using-javascript.htm -->
+                            <script>
+                                function setSelectedIndex(s, valsearch) {
+                                // Loop through all the items in drop down list
+                                    for (i = 0; i< s.options.length; i++) {
+                                        if (s.options[i].value == valsearch) {
+                                        // Item is found. Set its property and exit
+                                            s.options[i].selected = true;
+                                            break;
+                                        }
+                                    }
+                                    return;
+                                }
+                                setSelectedIndex(document.getElementById("role"),"<%= rows.role %>");
+                                setSelectedIndex(document.getElementById("status"),"<%= rows.status %>");
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

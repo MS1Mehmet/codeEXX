@@ -1,0 +1,170 @@
+<!-- Übersicht anderer Benutzer -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+        <script src="/editCode/codemirror.js"></script>
+		<link rel="stylesheet" href="/editCode/codemirror.css">
+		<link rel="stylesheet" href="/editCode/ayu-mirage.css">
+        <script src="/editCode/javascript/javascript.js"></script>
+        <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - Benutzerliste</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Flex-Container für Seiten-Menü und Inhalt -->
+        <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+            <div id="menu" class="side-menu">
+                <div class="menu-hl">MENÜ</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                    <p class="menu-button"><a href="/my-profile">[ My Snippets ]</a></p>
+                    <p class="menu-button"><a href="/userlist"><b>[ Other Users ]</b></a></p>
+                    <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                        <input type="hidden" name="userTab" value="<%= adminname %>">
+                        <input type="submit" value="[ Favorites ]">
+                    </form>
+                    <p class="menu-button"><a href="/settings">[ Settings ]</a></p>
+                </div>
+                <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                </div>
+            </div>
+            <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                <div class="inner" style="justify-content: flex-start; width: 100%;">
+                    <div style="margin-left: 14%; width: 100%;">
+                        <h1 style="margin-left: 20px; margin-right: 20px;">Admin Panel</h1>
+                        <p style="margin-left: 20px; margin-right: 20px;">
+                            Hier können Nutzer bearbeitet werden. <br>
+                            <span style="color: red; font-weight: bold;">Achtung:<br> Das Löschen eines Benutzers kann nicht rückgängig gemacht werden!</span></p>
+                        <div>
+                            <!-- Benutzerliste & Verwaltung -->
+                            <div style="margin-bottom: 20px;">
+                                <h2 style="font-size: 16px; font-weight: bold; text-decoration: underline;">Benutzer hinzufügen</h2>
+                                <form action="newUser" method="POST">
+                                    <table style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>E-Mail:</th>
+                                                <th>Benutzername:</th>
+                                                <th>Passwort:</th>
+                                                <th>Password Wdh.:</th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" id="email" name="email" oninput="checkEmail()" required></td>
+                                                <td><input type="text" name="loginname" id="loginname" oninput="checkName()" required></td> <!-- checkName() ist noch nicht definiert -->
+                                                <td><input type="password" id="password1" name="password1" oninput="checkPass()" required></td>
+                                                <td><input type="password" id="password2" name="password2" oninput="checkMatch()" required></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: none;"><div class="error-msg email">E-Mail falsch.</div></td>
+                                                <td style="border: none;"><div class="error-msg loginname" style="display:none;">Name vergeben.</div></td>
+                                                <td style="border: none;"><div class="error-msg password1">Passwort zu kurz.</div></td>
+                                                <td style="border: none;"><div class="error-msg password2">Stimmt nicht überein.</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" style="text-align: center;"><input type="submit" class="button-invert" style="font-size: 12px;" value="hinzufügen"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <input type="hidden" id="origin" name="origin" value="adminpanel">
+                                </form>
+                            </div>
+                            <h2 style="font-size: 16px; font-weight: bold; text-decoration: underline;">Benutzerübersicht</h2>
+                            <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th><b>Loginname</b></th>
+                                    <th><b>E-Mail</b></th>
+                                    <th><b>Rolle</b></th>
+                                    <th><b>Favoriten-Tabelle</b></th>
+                                    <th><b>Status</b></th>
+                                    <th colspan="2" style="text-align: center;">Aktionen</th>
+                                </tr>
+                            </thead>
+                                    <% for(var i = 0; i < allusers.length ; i++) { %>
+                                        <tr id='row<%=allusers[i].id%>'>
+                                            <td><a href="/profile?view=<%=allusers[i].loginname%>"><%= allusers[i].loginname %></a></td>
+                                            <td><%= allusers[i].email %></td>
+                                            <td><%= allusers[i].role %></td>
+                                            <td><%= allusers[i].favorites %></td>
+                                            <td style="text-align: center;"><%= allusers[i].status %> </td>
+                                            <td>
+                                                <form action="/delete?id=<%=allusers[i].id%>&loginname=<%= allusers[i].loginname %>" method="POST"> 
+                                                <button class="button-invert" style="font-size: 12px; width: 100%;" type="submit" onclick="confirmDelete('row<%=allusers[i].id%>')">löschen</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="/update/<%=allusers[i].id%>" method="POST"> 
+                                                <button class="button-invert" style="font-size: 12px; width: 100%;" type="submit">bearbeiten</button>
+                                                </form>
+                                            </td>
+                                        
+                                        </tr>
+                                    <% } %>
+                            </table>
+                            <div>
+                                <h2 style="font-size: 14px;">Statuscodes:</h2>
+                                <table style="border: none;">
+                                    <thead>
+                                        <th style="padding: 0px 10px 0px 10px;">Status</th>
+                                        <th style="padding: 0px 10px 0px 10px;">Bedeutung</th>
+                                    </thead>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>aktiv</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>inaktiv</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>gesperrt</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

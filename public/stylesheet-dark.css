@@ -1,0 +1,590 @@
+/*
+     ## CSS rules to specify families:
+            font-family: 'Poppins', sans-serif;
+            font-family: 'Share Tech Mono', monospace;
+*/
+
+/* Style des HTML-Body und der enthaltenen Elemente definieren */
+
+body {
+    background-color: #121212;
+    min-height: 90vh; /* Displayhöhe als Mindesthöhe des Bodies */
+    margin: 0px;
+  }
+  
+/* Flex-Box für Responsive-Design definieren */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  background-color: #121212;
+}
+  
+  .flex-container > div {
+    margin: 0px;
+    padding: 20px;
+    align-items: center;
+  }
+
+  /* Navigationspunkt oben nach Flex-Container */
+  .flex-container > .nav-button-top {
+    display:flex;
+    margin: 0px;
+    align-items: flex-end;
+    border-bottom-style: solid;
+    border-bottom-color: #FF9000;
+    border-bottom-width: 2px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+  }
+
+  .flex-code {
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 150px;
+    max-width: 960px;
+    padding: 20px;
+    background-color: #121212;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+/* Innere Div-Box zur Zentrierung des gesamten Inhalts */
+.inner {
+  width: 100%;
+  max-width: 960px;
+  margin: 0px auto 0px auto;
+  padding: 20px;
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+  
+/* Navigationspunkt oben */
+.navigation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  background-color: #121212;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 0px 15px 0px rgba(192,192,192,0.2);
+  z-index: 7; /* soll alle anderen Elemente überlagern */
+}
+
+.inner-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 984px;
+  margin: 0px;
+  padding: 20px;
+  background-color: #121212;
+}
+
+.nav-button-top {
+  display: flex;
+  align-items: flex-end;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 22px;
+  border-bottom-style: solid;
+  border-bottom-color: #FF9000;
+  border-bottom-width: 2px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+  /* Link in Navigation */
+  .nav-button-top > a:link {
+    text-decoration: none;
+    color: #eee;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 110px;
+    text-align: center;
+  }
+
+  .nav-button-top > a:visited {
+    text-decoration: none;
+    color: #eee;
+  }
+
+  /* Hover-Link in Navigation */
+  .nav-button-top > a:hover {
+    color: black;
+    background-color: #FF9000;
+    font-weight: normal;
+  }
+
+/* Parallax-Effekt Bildbereiche */
+.parallax-maxiteaser {
+  background-image: url("/img/maxiteaser.jpg");
+  min-height: 400px;
+
+  /* Parallax-Effekt */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-infobox {
+  background-image: url("/img/image-bg2.jpg");
+  min-height: 400px;
+
+  /* Parallax-Effekt */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Style der Headline 1 */
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #eee;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #eee;
+}
+
+h3 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 32px;
+  color: #eee;
+  background-color: #0A64A4;
+  padding: 5px;
+  margin: 0px;
+}
+
+h4 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 24px;
+  color: white;
+  background-color: #0A64A4;
+  margin: 0px;
+  padding: 15px 15px 0px 15px;
+}
+
+/* Style Paragraph */
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #eee;
+}
+
+a {
+  color: #eee;
+}
+
+a:hover {
+  color: #eee;
+  font-weight: bold;
+}
+
+a:visited {
+  color: #eee;
+}
+
+.codelink {
+  color: white;
+  text-decoration: none;
+}
+
+.codelink:hover {
+  color: white;
+  font-weight: bold;
+}
+
+.codelink:visited {
+  color: white;
+}
+
+li {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #eee;
+}
+
+/* Style für Terms (Impressum etc.) */ 
+.terms {
+  font-family: 'Poppins', sans-serif;
+}
+
+  .terms > p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+.code-area {
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  border-radius: 15px;
+}
+
+  /* Beschreibungstexte der Code-Snippets */
+.code-desc {
+  font-size: 14px;
+  background-color: #0A64A4;
+  color: white;
+  padding: 15px;
+  margin: 0;
+}
+
+/* Style für Container für Code-Überschrift & "last edited" */ 
+.code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  background-color: #0A64A4;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+} 
+/*   .code-head > p {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: white;
+    margin: 0px 10px 0px 0px;
+  } */
+
+  .code-head > table {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: white;
+    margin: 0px 10px 0px 0px;
+    border: none;
+  }
+
+/* Style für Textarea (Code-Snippet-Description) */
+
+  .container {
+    max-width: 770px;
+    margin: 0px auto;
+    margin-top: 20px;
+  }
+  .description {
+    float: left;
+    width: 100%;
+    height: auto;
+  }
+
+  .textinput {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    border: solid;
+    border-color: #b4b4b4;
+    background-color: #b4b4b4;
+    float: left;
+    width: 100%;
+    min-height: 75px;
+    outline: none;
+    resize: none;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    border-radius: 3px;
+  }
+
+/* <pre>-Tags mit exakter Formatierung */
+pre {
+  background-color: #b2b2b2b2;
+  padding: 10px;
+  margin: 0px;
+}
+
+/* Style für Menü-Buttons auf Profilseite */
+.side-menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: fixed;
+}
+
+.menu-hl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 24px;
+  letter-spacing: 0.1pt;
+  text-align: center;
+  background-color: #FF9000;
+  color: white;
+  padding: 5px 0px 5px 0px;
+  margin: 10px 0px 5px 0px;
+  width: 130px;
+  height: auto;
+}
+
+.menu-container {
+  width: 104px;
+  border-style: solid;
+  border-color: #FF9000;
+  padding: 10px;
+}
+
+.menu-button {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-button > a {
+  text-decoration: none;
+  color: #eee;
+}
+
+.menu-button > a:hover {
+  text-decoration: underline;
+  color: #eee;
+  font-weight: bold;
+}
+
+.menu-button > a:visited {
+  text-decoration: none;
+  color: #eee;
+}
+
+.menu-button > input {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  font-weight: normal;
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: #eee;
+  padding: 0px;
+}
+
+.menu-button > input:hover {
+  text-decoration: underline;
+  color: #eee;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Style Infotext Infobox Startseite */
+.infotext {
+  color: white;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Style für Formular-Label */
+.formlabel {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 24px;
+  color: #eee;
+  padding: 0px;
+  margin: 2px;
+}
+
+/* Style für Formular-Inputfeld */
+.forminput {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  border: solid;
+  border-color: #b4b4b4;
+  background-color: #b4b4b4;
+  width:355px;
+  height:26px;
+  padding-left: 5px;
+  margin: 2px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.error-msg {
+  font-family: 'Share Tech Mono', monospace;
+  color: firebrick;
+  display: none;
+}
+
+.error-text {
+  color: black;
+  background-color: #ffb4b4;
+  text-align: center;
+  padding: 25px;
+}
+
+.error-text > a {
+  color: black;
+}
+
+.error-text > a:hover {
+  color: black;
+}
+
+.error-text > a:visited {
+  color: black;
+}
+
+/* Style für Dropdowns */
+
+.select-wrapper {
+  width: 200px;
+}
+
+select {
+  /* -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none; */
+  border: none;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  background: #b4b4b4;
+  margin: 10px 0px 10px 0px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style für Tabellen */
+table {
+  border: solid;
+  border-color: #FF9000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  border-spacing: 0px 0rem;
+  border-collapse: separate;
+}
+
+td {
+  color: #eee;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 10px 5px 10px;
+}
+
+.td-fav {
+  color: #1f2430;
+}
+
+th {
+  background: #FF9000;
+  text-align: left;
+  border-bottom: solid;
+  border-color:#FF9000;
+  padding: 5px 10px 5px 10px;
+}
+
+tr {
+  border-right: none;
+  border-left: none;
+}
+tr:hover {
+  background-color: #3f3f3f;
+}
+
+/* Style Footer */
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap; 
+  height: 50px;
+  background-color: #FF9000;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+  z-index: 4; /* soll alle anderen Elemente überlagern */
+}
+
+.footer {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  color: #121212;
+  text-align: center;
+  font-weight: 500;
+}
+
+.footer > a:link {
+  text-decoration: none;
+  color: #121212;
+}
+
+.footer > a:visited {
+  text-decoration: none;
+  color: #121212;
+}
+
+/* Button-Style */
+.cta-button {
+background-color: #FF9000;
+color: #121212;
+font-family: 'Poppins', sans-serif;
+font-weight: 700;
+font-size: 18px;
+text-decoration: none;
+text-transform: uppercase;
+padding: 5px 10px;
+border-style: solid;
+border-color: #FF9000;
+margin-right: 10px;
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+border-radius: 3px;
+}
+
+/* Button-Style hover */
+.cta-button:visited {
+  color: #121212;
+}
+
+.cta-button:hover {
+  color: #FF9000;
+  background-color: #121212;
+  cursor: pointer;
+}
+
+.cta-button + a:visited {
+  color: #121212;
+}
+
+.cta-button + a:hover {
+  color: #FF9000;
+}
+
+/* Button-Style inverted */
+.button-invert {
+  background-color:#121212;
+  color: #FF9000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-style: solid;
+  border-color: #FF9000;
+  margin-right: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+  border-radius: 3px;
+  }
+  
+  /* Button-Style hover inverted */
+  .button-invert:hover{
+    background-color:  #FF9000;
+    color: #121212;
+    cursor: pointer;
+  }

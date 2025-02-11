@@ -1,0 +1,99 @@
+<!-- Favoriten-Ansicht -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+        <script src="/editCode/codemirror.js"></script>
+		<link rel="stylesheet" href="/editCode/codemirror.css">
+		<link rel="stylesheet" href="/editCode/ayu-mirage.css">
+        <script src="/editCode/javascript/javascript.js"></script>
+        <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - <%=username%>s Profil</title>
+    </head>
+    <body>
+            <!-- Navigation & Website-Header -->
+            <div class="navigation-container">
+                <div class="inner-nav">
+                    <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+                </div>
+            </div>
+            <div style="margin-top: 109px;"></div>
+            <!-- Flex-Container für Seiten-Menü und Inhalt -->
+            <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+                <div id="menu" class="side-menu">
+                    <div class="menu-hl">MENÜ</div>
+                    <div class="menu-container">
+                        <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                        <p class="menu-button"><a href="/my-profile">[ My Snippets ]</a></p>
+                        <p class="menu-button"><a href="/userlist">[ Other Users ]</a></p>
+                        <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                            <input type="hidden" name="userTab" value="<%= username %>">
+                            <input type="submit" value="[ Favorites ]">
+                        </form>
+                        <p class="menu-button"><a href="/settings">[ Settings ]</a></p>
+                    </div>
+                    <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                    <div class="menu-container">
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                    </div>
+                </div>
+                <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                    <div class="inner" style="justify-content: flex-start; width: 100%;">
+                        <div style="margin-left: 14%; width: 100%;">
+                            <div class="inner" style="justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; margin: 0px;">
+                                <div style="background-color: #FF9000; clip-path: circle(65px at center); margin-right: 5%;">
+                                    <div style="clip-path: circle(60px at center);">
+                                        <img src="/img/profileImages/<%=profilepic%>" style="height: 130px;"></img>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h1 style="margin-left: 20px; margin-right: 20px;"><i><%=username%>s</i> Profil</h1>
+                                    <p style="margin-left: 20px; margin-right: 20px;">
+                                        <%=username%> hat die folgenden Code-Snippets erstellt:
+                                    </p>
+                                </div>
+                            </div>
+                            <div style="min-height: 700px; width: 95%;">
+                                <p class="error-text">
+                                    <b><%=username%> hat bisher keine Code-Snippets erstellt!</b><br><br>
+                                    Schau dich<br>
+                                    <a href="/userlist">einfach auf anderen Profilen</a><br>
+                                    um und füge gute Snippets deiner Sammlung hinzu!
+                                </p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div style="margin-bottom: 50px;"></div>
+            <div class="footer-container">
+                <p class="footer">© 2020 CODEX &nbsp;
+                    <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+                </p>
+            </div>
+    </body>
+</html>

@@ -1,0 +1,192 @@
+<!-- Editier-Ansicht Code-Snippets -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+            <!-- Required -->
+            <script src="/editCode/codemirror.js"></script>
+            <link rel="stylesheet" href="/editCode/codemirror.css">
+            <!-- Theme -->
+            <link rel="stylesheet" href="/editCode/ayu-mirage.css">
+            <!-- Jede Sprache, deren Syntax von CodeMirror erkannt werden soll, muss hier geladen werden -->
+            <!-- Hier zum Veranschaulichen nur ausgewählte. Evtl. später dynamisch ladbar, wenn je Sprache eine Seite gerendert wird. -->
+            <script src="/editCode/javascript/javascript.js"></script>  
+            <script src="/editCode/python/python.js"></script>          
+            <script src="/editCode/clike/clike.js"></script>
+            <script src="/editCode/htmlembedded/htmlembedded.js"></script>
+            <script src="/editCode/htmlmixed/htmlmixed.js"></script>
+            <script src="/editCode/php/php.js"></script>
+            <script src="/editCode/css/css.js"></script>
+            <script src="/editCode/xml/xml.js"></script>
+            <script src="/editCode/powershell/powershell.js"></script>
+            <!-- Additional Modes von CodeMirror-->
+            <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - Login</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Flex-Container für Seiten-Menü und Inhalt -->
+        <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+            <div id="menu" class="side-menu">
+                <div class="menu-hl">MENÜ</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                    <p class="menu-button"><a href="/my-profile">[ My Snippets ]</b></a></p>
+                    <p class="menu-button"><a href="/userlist">[ Other Users ]</b></a></p>
+                    <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                        <input type="hidden" name="userTab" value="<%= username %>">
+                        <input type="submit" value="[ Favorites ]">
+                    </form>
+                    <p class="menu-button"><a href="/settings">[ Settings ]</b></a></p>
+                </div>
+                <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                </div>
+            </div>
+            <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                <div class="inner" style="justify-content: flex-start; width: 100%;">
+                <div style="margin-left: 14%; width: 100%; max-width: 800px;">
+                    <h1 style="margin: 0px 20px 20px 20px;">Code-Snippet bearbeiten:</h1>
+                    <form action="/onChangeCode/" method="POST" style="margin: 0px 20px 20px 20px; width: 100%;"> 
+                        <div>
+                            <label for="headline" class="formlabel"><b>Überschrift:</b></label><br>
+                            <input type="hidden" name="id" value=<%= snippetId %>>
+                            <input type="text" id="head" name="head" class="forminput" value="<%= snippetHead %>" required><br><br>
+                        </div>
+                        <div style="margin-bottom: 35px;">
+                            <label for="description" class="formlabel"><b>Beschreibung:</b></label>
+                            <div class="container" style="margin: 0px;">
+                                <div class="description">
+                                    <textarea id="desc" name="desc" class="textinput" required><%= snippetDesc %></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Optionen für Auswahl der Syntax zum Speichern des Editor-Modus -->
+                        <select id="format" name="format" onchange="changeCmMode()" required>
+                            <option id="clike" value="c">C</option>
+                            <option id="clike" value="c++">C++</option>
+                            <option id="clike" value="c#">C#</option>
+                            <option id="coffeescript" value="coffeescript">CoffeeScript</option>
+                            <option id="commonlisp" value="commonlisp">Common Lisp</option>
+                            <option id="css" value="css">CSS</option>
+                            <option id="django" value="django">Django</option>
+                            <option id="htmlembedded" value="ejs">Embedded Javascript</option>
+                            <option id="htmlmixed" value="html">HTML</option>
+                            <option id="http" value="http">HTTP</option>
+                            <option id="clike" value="java">Java</option>
+                            <option id="javascript" value="javascript">JavaScript</option>
+                            <option id="julia" value="julia">Julia</option>
+                            <option id="mathematica" value="mathematica">Mathematica</option>
+                            <option id="sql" value="mysql">MySQL</option>
+                            <option id="clike" value="objectivec">Objective-C</option>
+                            <option id="clike" value="objectivec++">Objective-C++</option>
+                            <option id="pascal" value="pascal">Pascal</option>
+                            <option id="perl" value="perl">Perl</option>
+                            <option id="php" value="php">PHP</option>
+                            <option id="null" value="text">Plain Text</option>
+                            <option id="powershell" value="powershell">Power Shell</option>
+                            <option id="python" value="python">Python</option>
+                            <option id="r" value="r">R</option>
+                            <option id="ruby" value="ruby">Ruby</option>
+                            <option id="shell" value="shell">Shell</option>
+                            <option id="spreadsheet" value="spreadsheet">Spreadsheet</option>
+                            <option id="sql" value="sql">SQL</option>
+                            <option id="sql" value="sqlite">SQLite</option>
+                            <option id="swift" value="swift">Swift</option>
+                            <option id="stex" value="latex">LaTeX</option>
+                            <option id="javascript" value="typescript">TypeScript</option>
+                            <option id="vb" value="vbnet">VB.NET</option>
+                            <option id="vbscript" value="vbscript">VBScript</option>
+                            <option id="xml" value="xml">XML</option>
+                        </select>
+                        <!-- Javascript, um die aktuelle Syntax des zu bearbeitenden Codes vorauszuwählen -->
+                        <!-- Quelle: https://www.daftlogic.com/information-programmatically-preselect-dropdown-using-javascript.htm -->
+                        <script>
+                        function setSelectedIndex(s, valsearch) {
+                        // Loop through all the items in drop down list
+                            for (i = 0; i< s.options.length; i++) {
+                                if (s.options[i].value == valsearch) {
+                                // Item is found. Set its property and exit
+                                    s.options[i].selected = true;
+                                    break;
+                                }
+                            }
+                            return;
+                        }
+                        setSelectedIndex(document.getElementById("format"),"<%= snippetFormat %>");
+                        </script>
+                        <!-- Nachfolgendes <textarea> mit 'id="unnecessary"' hat keine richtige Funktion. Ohne die Area verschwindet CodeMirror aber seltsamerweise -->
+                        <textarea id="unnecessary" style="border:none; margin: 0px; height: 0px; resize: none;"></textarea>
+                        <textarea id=snippetIdent name="code"><%= snippetCode %></textarea><br>
+                        <input type="hidden" id="edited" name="edited" value="<%= timestamp %>">
+                        
+                        <!-- Versteckte Input-Felder erzeugen, die geänderte Werte annehmen -->
+                        <script>
+                            function createHiddenInput() {
+                                var hiddenCode = document.createElement('input');
+                                hiddenCode.setAttribute('value', `${editor2.getValue()}`);
+                            }
+                        </script>
+                        <button class="cta-button" onclick="createHiddenInput()" style="width: 135px;">SPEICHERN</button>
+                        <a href="/my-profile" class="cta-button" style="width: 135px;">ABBRECHEN</a>
+                    </form>
+                <!-- CodeMirror Script, um textarea durch den Editor zu ersetzen -->
+                <script> 
+                    var idCode = "snippetIdent";
+                    var cMirrorMode = "<%= cmMode %>";
+                    var editor2 = CodeMirror.fromTextArea(document.getElementById(idCode), {
+                        lineNumbers: true, theme: "ayu-mirage", styleActiveLine: true, mode: cMirrorMode});
+                    editor2.on("change", function(editorChange) {
+                        console.log(editorChange.getValue());
+                    });
+                    
+                    // Funktion, um den Modus direkt bei Änderung im Dropdown zu ändern
+                    function changeCmMode () {
+                        var dropDown = document.getElementById("format");
+                        var newMode = dropDown.options[dropDown.selectedIndex].id;
+                        editor2.setOption("mode", `${newMode}`);
+                    }
+                </script>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

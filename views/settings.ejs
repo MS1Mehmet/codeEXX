@@ -1,0 +1,152 @@
+<!-- Favoriten-Ansicht -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>" id="stylesheet-theme">
+        <link rel="stylesheet" href="/slider.css">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+        <script src="/editCode/codemirror.js"></script>
+		<link rel="stylesheet" href="/editCode/codemirror.css">
+		<link rel="stylesheet" href="/editCode/ayu-mirage.css">
+        <script src="/editCode/javascript/javascript.js"></script>
+        <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - Settings</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+            <!-- Flex-Container für Seiten-Menü und Inhalt -->
+            <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+                <div id="menu" class="side-menu">
+                    <div class="menu-hl">MENÜ</div>
+                    <div class="menu-container">
+                        <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                        <p class="menu-button"><a href="/my-profile">[ My Snippets ]</a></p>
+                        <p class="menu-button"><a href="/userlist">[ Other Users ]</a></p>
+                        <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                            <input type="hidden" name="userTab" value="<%= currentLoginname %>">
+                            <input type="submit" value="[ Favorites ]">
+                        </form>
+                        <p class="menu-button"><a href="/settings"><b>[ Settings ]</b></a></p>
+                    </div>
+                    <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                    <div class="menu-container">
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                        <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                    </div>
+                </div>
+                <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                    <div class="inner" style="justify-content: flex-start; width: 100%;">
+                        <div style="margin-left: 14%; width: 100%;">
+                            <div class="inner" style="justify-content: space-between; flex-direction: row; flex-wrap: nowrap;">
+                                <div class="inner" style="justify-content: flex-start; flex-direction: column; align-items: flex-start; width: 100%;">
+                                    <h1 style="margin-left: 20px; margin-right: 20px;">Einstellungen</h1>
+                                    <p style="margin-left: 20px; margin-right: 20px;">Deine persönlichen Einstellungen:</p>
+                                </div>
+                                <div style="background-color: #FF9000; clip-path: circle(65px at center);">
+                                    <div style="clip-path: circle(60px at center);">
+                                        <img src="/img/profileImages/<%=profilepic%>" style="height: 150px;"></img>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="min-height: 700px;">
+                                <div style="<%=errorMessage%>">
+                                    <p style="background-color: #ffb4b4; text-align: center; padding: 25px;">
+                                        <b>Bitte überprüfe deine Angaben:</b><br><br>
+                                        Besteht das Passwort aus mind. 8 Zeichen?<br>
+                                        Stimmen beide Passwortfelder überein?<br>
+                                        Hat deine E-Mailadresse das richtige Format?
+                                    </p>
+                                </div>
+                                <!-- Formular zum bearbeiten des Nutzers-->
+                                <form action="/selfupdate" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; margin: 25px 15px 25px 15px;">
+                                    <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                        <label for="image" class="formlabel">Profilbild:</label>
+                                        <input class="forminput" type="file" name="image" id="image" accept=".jpg, .jpeg, .png, .gif">
+                                        <input type="hidden" name="oldImage" value="<%=profilepic%>">
+                                    </div>
+                                    <div style="align-self: flex-end;"><p style="font-size: 12px; margin: 0px; color: red;">*.jpg, *.png, *.gif; max. 1 MB</p></div>
+                                    <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                        <label for="password" class="formlabel">Passwort ändern:</label>
+                                        <input class="forminput" type="password" name="password" id="password1" oninput="checkPass()" placeholder="mind. 8 Zeichen">
+                                    </div>
+                                    <div style="margin-left: 9px;">
+                                        <div class="error-msg password1">Passwort ist zu kurz.</div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                        <label for="password" class="formlabel">Passwort wiederholen:</label>
+                                        <input class="forminput" type="password" name="password2" id="password2" oninput="checkMatch()" placeholder="">
+                                    </div>
+                                    <div style="margin-left: 9px;">
+                                        <div class="error-msg password2">Passwörter stimmen nicht überein.</div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                        <label for="email" class="formlabel">E-Mail:</label>
+                                        <input class="forminput" type="text" name="email" id="email" oninput="checkEmail()" value="<%=currentEmail%>">
+                                    </div>
+                                    <div style="margin-left: 9px;">
+                                        <div class="error-msg email">Bitte E-Mailadresse überprüfen.</div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin: 5px;">
+                                        <label for="darkmode" class="formlabel">Darkmode:</label>
+                                        <label class="switch">
+                                            <input id="darkmode" type="checkbox" name="darkmode" onchange="changeDarkmode()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <script>
+                                            function toggleSwitch(){
+                                                if (document.getElementById("stylesheet-theme").href.includes("stylesheet-dark")) {
+                                                    document.getElementById("darkmode").checked = true;
+                                                }
+                                            }
+                                            toggleSwitch();
+                                        </script>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; margin: 25px;">
+                                        <button class="cta-button" type="submit">Speichern</button>
+                                        <a href="/my-profile" class="cta-button">Abbrechen</a>
+                                    </div>
+                                    <input class="forminput" type="hidden" name="id" value="<%=currentID%>">
+                                    <input class="forminput" type="hidden" name="loginname" value="<%=currentLoginname%>">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div style="margin-bottom: 50px;"></div>
+            <div class="footer-container">
+                <p class="footer">© 2020 CODEX &nbsp;
+                    <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

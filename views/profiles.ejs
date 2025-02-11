@@ -1,0 +1,155 @@
+<!-- Benutzerprofil fremdansicht (nicht als Eigentümer) -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+            <!-- Required -->
+            <script src="/editCode/codemirror.js"></script>
+            <link rel="stylesheet" href="/editCode/codemirror.css">
+            <!-- Theme -->
+            <link rel="stylesheet" href="/editCode/ayu-mirage.css">
+            <!-- Jede Sprache, deren Syntax von CodeMirror erkannt werden soll, muss hier geladen werden -->
+            <!-- Hier zum Veranschaulichen nur ausgewählte. Evtl. später dynamisch ladbar, wenn je Sprache eine Seite gerendert wird. -->
+            <script src="/editCode/javascript/javascript.js"></script>  
+            <script src="/editCode/python/python.js"></script>          
+            <script src="/editCode/clike/clike.js"></script>
+            <script src="/editCode/htmlembedded/htmlembedded.js"></script>
+            <script src="/editCode/htmlmixed/htmlmixed.js"></script>
+            <script src="/editCode/php/php.js"></script>
+            <script src="/editCode/css/css.js"></script>
+            <script src="/editCode/xml/xml.js"></script>
+            <script src="/editCode/powershell/powershell.js"></script>
+            <!-- Additional Modes von CodeMirror-->
+            <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - <%=username%>s Profil</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Flex-Container für Seiten-Menü und Inhalt -->
+        <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+            <div id="menu" class="side-menu">
+                <div class="menu-hl">MENÜ</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                    <p class="menu-button"><a href="/my-profile">[ My Snippets ]</a></p>
+                    <p class="menu-button"><a href="/userlist">[ Other Users ]</a></p>
+                    <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                        <input type="hidden" name="userTab" value="<%= sessionName %>">
+                        <input type="submit" value="[ Favorites ]">
+                    </form>
+                    <p class="menu-button"><a href="/settings">[ Settings ]</a></p>
+                </div>
+                <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                </div>
+            </div>
+            <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                <div class="inner" style="justify-content: flex-start; width: 100%;">
+                <div style="margin-left: 14%; width: 100%;">
+                    <p class="error-text" style="<%=errorStyle%>">
+                        <b>Code bereits in Favoriten!</b><br>
+                    </p>
+                    <div class="inner" style="justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; margin: 0px;">
+                        <div style="background-color: #FF9000; clip-path: circle(65px at center); margin-right: 5%;">
+                            <div style="clip-path: circle(60px at center);">
+                                <img src="/img/profileImages/<%=profilepic%>" style="height: 130px;"></img>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 style="margin-left: 20px; margin-right: 20px;"><span style="text-decoration: underline; text-decoration-color: #FF9000;"><i><%=username%>s</i></span> Profil</h1>
+                            <p style="margin-left: 20px; margin-right: 20px;">
+                                <%=username%> hat die folgenden Code-Snippets erstellt:
+                            </p>
+                        </div>
+                    </div>
+<div style="width: 95%; max-width: 800px;">
+<!-- Hier beginnt der for Loop zum erstellen der Editorfelder -->   
+    <% for(var i = 0; i < codelist.length; i++){ %>
+    <div id="code-heading<%= codelist[i].id %>" style="position:relative; top:-150px;"></div>
+    <div class="code-head" style="background-color:#0A64A4;">
+        <h4 style="background-color: #0A64A4; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;"><%= codelist[i].headline %></h4>
+        <table id=<%= `codeInfo${codelist[i].id}` %> style="color: white;">
+            <tr style="background-color: transparent;"><td style="border: none;"><span style="text-decoration: underline;">last edited</span>:</td><td style="border: none;"><%= `${codelist[i].edited}` %></td></tr>
+            <tr style="background-color: transparent;"><td style="border: none;"><span style="text-decoration: underline;">Format</span>:</td><td name=<%= `language${codelist[i].id}` %> style="border: none;">Sprache</td></tr>
+            <tr style="background-color: transparent;"><td style="border: none;"><span style="text-decoration: underline;">User</span>:</td><td style="border: none;"><a class="codelink" href="profile?view=<%= username %>" style="color: white;"><%= username %></a></td></tr>
+            <!-- Kurzes Script, um die entsprechende Sprache einzusetzen-->
+            <script>
+                var formatLang = "<%= codelist[i].format %>";
+                document.getElementsByName("language<%= codelist[i].id %>")[0].innerHTML = document.getElementsByName("language<%= codelist[i].id %>")[0].innerHTML.replace('Sprache', getFormatName(formatLang));
+            </script>
+        </table>
+    </div>
+    <p class="code-desc" id="code-desc" style="background-color: #0A64A4;"><%= codelist[i].description %></p>
+<!-- CodeMirror-Editor: Code muss ganz links stehen, damit keine ungewollten Einrückungen im Code entstehen. -->
+    <form style="margin-bottom: 10px;">
+<textarea id=<%= `snippet${codelist[i].id}` %> name="code">
+<%= codelist[i].code %>
+</textarea>
+            </form>
+            <!-- CodeMirror-Script sucht nach Elementen mit id 'codeid' und aktiviert Editor -->
+    <script> 
+        var codeid = "snippet" + <%= codelist[i].id %>; // wird von VSC als Problem identifiziert, da VSC kein EJS unterstützt (https://github.com/Microsoft/vscode/issues/51118)
+        var editor<%= codelist[i].id %> = CodeMirror.fromTextArea(document.getElementById(codeid), {
+            lineNumbers: true,                // Boolean: aktiviert Zeilennummern
+            theme: "ayu-mirage",              // Theme-Auswahl für Editor
+            styleActiveLine: true,            // Boolean: Aktive Zeile wird markiert
+            readOnly: true,                   // Boolean: Keine Änderungen im Editor möglich.
+            mode: "<%= codelist[i].cmmode %>" // String; Nutzungmodus des Editors ('Sprache')
+        });
+        editor<%= codelist[i].id %>.on("change", function(editorChange) {       // Bei Änderungen feuert das Change-Event und führt die nachfolgende Funktion aus
+            console.log(editorChange.getValue());    // gibt in der Browser-Konsole den veränderten Text aus (zum Test)
+        });
+    </script>
+    <div class="flex-container" style="justify-content: flex-end; margin-bottom: 20px;">
+        <form action="/addfav" method="POST" id="fav">
+            <input type="hidden" name="favTableName" value="<%= sessionName %>">
+            <input type="hidden" name="favid" value="<%= codelist[i].id %>">
+            <input type="hidden" name="origin" value="<%= username %>">
+            <input type="submit" class="cta-button" value="FAVORISIEREN">
+        </form>
+    </div>
+<% } %>
+</div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

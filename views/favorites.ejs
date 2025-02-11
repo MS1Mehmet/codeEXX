@@ -1,0 +1,128 @@
+<!-- Favoriten-Ansicht -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Laden der CodeMirror-Dateien -->
+        <script src="/editCode/codemirror.js"></script>
+		<link rel="stylesheet" href="/editCode/codemirror.css">
+		<link rel="stylesheet" href="/editCode/ayu-mirage.css">
+        <script src="/editCode/javascript/javascript.js"></script>
+        <script src="/editCode/selection/active-line.js"></script>
+
+        <!-- Laden von Formular-Script -->
+        <script src="/js/form.js"></script>
+
+        <!-- Meta-Daten -->
+        <title>Codex - Favoriten</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Flex-Container für Seiten-Menü und Inhalt -->
+        <div class="inner" style="justify-content: flex-start; align-items: flex-start; max-width: 984px;">
+            <div id="menu" class="side-menu">
+                <div class="menu-hl">MENÜ</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/welcome">[ Start ]</a></p>
+                    <p class="menu-button"><a href="/my-profile">[ My Snippets ]</a></p>
+                    <p class="menu-button"><a href="/userlist">[ Other Users ]</a></p>
+                    <form action="/favorites" method="POST" id="favLink" class="menu-button">
+                        <input type="hidden" name="userTab" value="<%= sessionName %>">
+                        <input type="submit" value="[ Favorites ]" style="font-weight: bold;">
+                    </form>
+                    <p class="menu-button"><a href="/settings">[ Settings ]</a></p>
+                </div>
+                <div class="menu-hl" style="font-size: 19px;">last visited</div>
+                <div class="menu-container">
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis1%>">> <%=lastvis1%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis2%>">> <%=lastvis2%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis3%>">> <%=lastvis3%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis4%>">> <%=lastvis4%></b></a></p>
+                    <p class="menu-button"><a href="/profile?view=<%=lastvis5%>">> <%=lastvis5%></b></a></p>
+                </div>
+            </div>
+            <div class="flex-container" style="align-items: center; min-height: 350px; width: 100%;">
+                <div class="inner" style="justify-content: flex-start; width: 100%;">
+                <div style="margin-left: 14%; width: 100%;">
+                        <h1 style="margin-left: 20px; margin-right: 20px;">Deine Favoriten</h1>
+                        <p style="margin-left: 20px; margin-right: 20px;">Hier findest du deine als Favorit markierten Code-Snippets</p>
+<div style="width: 95%; max-width: 800px;">  
+    <!-- Hier beginnt der for Loop zum erstellen der Editorfelder -->   
+    <% for(var i = 0; i < favSnippets.length; i++){ %>
+    <div class="code-area">
+        <h4 id="code-heading<%= favSnippets[i].id %>" style="background-color: #FF9000; color: #1f2430; border-top-left-radius: 15px; border-top-right-radius: 15px;"><%= favSnippets[i].headline %></h4>
+        <div class="code-head" style="background-color: #FF9000; border-top-right-radius: 0%;">
+            <p class="code-desc" id="code-desc" style="width: 60%; background-color: #FF9000; color: #1f2430;"><%= favSnippets[i].description %></p>
+            <table id=<%= `codeInfo${favSnippets[i].id}` %> style="color: #1f2430;">
+                <tr style="background-color: transparent;"><td class="td-fav" style="border: none;"><span style="text-decoration: underline;">last edited</span>:</td><td class="td-fav" style="border: none;"><%= `${favSnippets[i].edited}` %></td></tr>
+                <tr style="background-color: transparent;"><td class="td-fav" style="border: none;"><span style="text-decoration: underline;">Format</span>:</td><td class="td-fav" name=<%= `language${favSnippets[i].id}` %> style="border: none;">Sprache</td></tr>
+                <tr style="background-color: transparent;"><td class="td-fav" style="border: none;"><span style="text-decoration: underline;">User</span>:</td><td class="td-fav" style="border: none;"><a class="codelink" href="profile?view=<%= favSnippets[i].loginname %>" style="color:#1f2430;"><%= favSnippets[i].loginname %></a></td></tr>
+                <!-- Kurzes Script, um die entsprechende Sprache einzusetzen-->
+                <script>
+                    var formatLang = "<%= favSnippets[i].format %>";
+                    document.getElementsByName("language<%= favSnippets[i].id %>")[0].innerHTML = document.getElementsByName("language<%= favSnippets[i].id %>")[0].innerHTML.replace('Sprache', getFormatName(formatLang));
+                </script>
+            </table>
+        </div>
+<!-- CodeMirror-Editor: Code muss ganz links stehen, damit keine ungewollten Einrückungen im Code entstehen. -->
+    <form style="margin-bottom: 10px;">
+<textarea id=<%= `snippet${favSnippets[i].id}` %> name="code">
+<%= favSnippets[i].code %>
+</textarea>
+            </form>
+            <!-- CodeMirror-Script sucht nach Elementen mit id 'codeid' und aktiviert Editor -->
+    <script> 
+        var codeid = "snippet" + <%= favSnippets[i].id %>; // wird von VSC als Problem identifiziert, da VSC kein EJS unterstützt (https://github.com/Microsoft/vscode/issues/51118)
+        var editor<%= favSnippets[i].id %> = CodeMirror.fromTextArea(document.getElementById(codeid), {
+            lineNumbers: true,                // Boolean: aktiviert Zeilennummern
+            theme: "ayu-mirage",              // Theme-Auswahl für Editor
+            styleActiveLine: true,            // Boolean: Aktive Zeile wird markiert
+            readOnly: true,                   // Boolean: Keine Änderungen im Editor möglich.
+            mode: "<%= favSnippets[i].cmmode %>" // String; Nutzungmodus des Editors ('Sprache')
+        });
+        editor<%= favSnippets[i].id %>.on("change", function(editorChange) {       // Bei Änderungen feuert das Change-Event und führt die nachfolgende Funktion aus
+            console.log(editorChange.getValue());    // gibt in der Browser-Konsole den veränderten Text aus (zum Test)
+        });
+    </script>
+    </div>
+    <div class="flex-container" style="justify-content: flex-end; margin-bottom: 20px;">
+        <form action="/delfav" method="POST" id="delfav">
+            <input type="hidden" name="favTableName" value="<%= sessionName %>">
+            <input type="hidden" name="favid" value="<%= favSnippets[i].id %>">
+            <input type="submit" class="cta-button" value="ENTFERNEN">
+        </form>
+    </div>
+<% } %>
+</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div style="margin-bottom: 50px;"></div>
+            <div class="footer-container">
+                <p class="footer">© 2020 CODEX &nbsp;
+                    <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+                </p>
+            </div>
+    </body>
+</html>

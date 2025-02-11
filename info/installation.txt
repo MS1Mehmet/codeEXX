@@ -1,0 +1,21 @@
+// Diese Module müssen installiert werden:
+
+npm install express --save
+
+npm install body-parser --save
+
+npm install ejs --save
+
+npm install sqlite3 --save
+
+npm install bcrypt --save 
+
+npm install cookie-parser --save
+
+npm install express-session --save
+
+npm install codemirror --save // Zur Sicherheit (sollte eigentlich nicht erforderlich sein)
+
+npm install express-fileupload --save
+
+Userdaten generiert mit https://www.generatedata.com/

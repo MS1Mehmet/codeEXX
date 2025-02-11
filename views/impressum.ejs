@@ -1,0 +1,208 @@
+<!-- Login -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Meta-Daten -->
+        <title>Codex - Login</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <!-- hier wird unterschieden zwischen angemeldetem und anonymem Benutzer-->
+                <% if (session == null) { %> <!-- ist die Session = null wird die normale Navi angezeigt -->
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/login">Login</a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/register">Register</a></div>
+                <% } else { %>               <!-- ist die Session != null wird der angemeldete Zustand der Session angezeigt -->
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/my-profile">Profile</a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+                <% } %>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Impressumstext -->
+        <div class="inner">    
+            <div class="flex-container" style="justify-content: flex-start;">
+                <div style="padding: 25px 75px 75px 75px;">
+                    <div id="imprint">
+                        <h1>Impressum</h1>
+                        <p><b style="font-size: 22px;">Codex - Projektarbeit APRG MS2 (WiSe 2020)</b><br>
+                            
+                            Mehmet Budak (2556262)<br>
+                            Christopher Spiller (2439062)<br>
+                            Moritz Uhlig (2555830)<br>
+                            Leander Wernst (2555900)<br><br>
+                            
+                            <b>Hochschule für angewandte Wissenschaften Hamburg</b><br>
+                            Angewandte Programmierung (Prof. Dr. Andreas Plaß)</span><br>
+                            Finkenau 35<br>
+                            22081 Hamburg<br>
+                        </p>
+                    </div>
+                    <div id="termsofuse" style="margin-bottom: 168px;"></div>
+                    <div class="terms">
+                        <h1>Nutzungsbedingungen</h1>
+                        <p style="font-size: 14px;">
+                            <p><strong>1. Geltungsbereich der Nutzungsbedingungen</strong></p>
+                            <p>(1)	Diese Nutzungsbedingungen gelten für das Online-Angebot CODEX, das im Internet unter CODEX abrufbar ist. Hierbei handelt es sich um eine Plattform, auf der Nutzer Profile anlegen können.<br>
+                            (2)	Sie können die derzeit gültigen Nutzungsbedingungen hier abrufen und ausdrucken.</p>
+                            <p><strong>2. Vertragsschluss und Benutzerkonto</strong></p>
+                            <p>(1)	Durch Abschluss des Online-Registrierungsvorgangs und Erstellung eines Profils kommt ein Nutzungsvertrag mit dem Betreiber zustande. Gegenstand des Nutzungsvertrages ist die kostenlose Nutzung des Profils.<br>
+                            (2)	Für die Erstellung eines Profils ist die Erstellung eines Benutzerkontos erforderlich. Dieses besteht aus einem Benutzernamen und einem Kennwort („Log-in-Daten“).<br>
+                            (3)	Die Erstellung eines Benutzerkontos ist nur unter Angabe einer aktuellen E-Mail-Adresse des Nutzers möglich. Diese E-Mail-Adresse dient zugleich der Kommunikation mit dem Betreiber.<br>
+                            (4)	Der Nutzer sichert zu, dass die bei Erstellung seines Profils verwendeten Daten („Profil-Daten“) zutreffend und vollständig sind. Die Nutzung von Pseudonymen ist unzulässig.<br>
+                            (5)	Vertragssprache ist ausschließlich deutsch.
+                            (6)	Bei jedweder Kommunikation des Nutzers mit anderen Nutzern entstehen etwaige Vertragsbeziehungen ausschließlich zwischen den beteiligten Nutzern. Der Betreiber ist weder Stellvertreter noch wird er selbst Vertragspartner.</p>
+                            <p><strong>3. Nutzung des Profils</strong></p>
+                            <p>(1)	Bei der Nutzung des Profils kann der Nutzer verschiedene Dienste in Anspruch nehmen:</p>
+                            <ul>
+                                <li>Der Nutzer hat die Möglichkeit, eigene Inhalte (Text, Code) innerhalb des Portals zu publizieren.</li>
+                                <li>Der Nutzer hat die Möglichkeit, Kommentare unter Code-Snippets anderer Nutzer zu schreiben.</li>
+                            </ul>
+                            <p>(2)	Der Betreiber ist jederzeit berechtigt, den Zugang zu einzelnen Inhalten zu sperren, z.B. wenn der Verdacht besteht, dass diese gegen geltenden Recht oder Rechte Dritter verstoßen. Es besteht kein Anspruch des Nutzers auf Aufrechterhaltung einzelner Funktionalitäten des Portals.<br>
+                            (3)	Der Betreiber ist um einen störungsfreien Betrieb des Portals bemüht. Dies beschränkt sich naturgemäß auf Leistungen, auf die der Betreiber einen Einfluss hat. Dem Betreiber ist es unbenommen, den Zugang zu dem Portal aufgrund von Wartungsarbeiten, Kapazitätsbelangen und aufgrund anderer Ereignisse, die nicht in seinem Machtbereich stehen, ganz oder teilweise, zeitweise oder auf Dauer, einzuschränken.</p>
+                            <p><strong>4. Mitwirkungspflicht des Nutzers: Einstellen von Inhalten</strong></p>
+                            <p>(1)	Der Nutzer verpflichtet sich, bei der Erstellung und Verwendung eigener Inhalte geltendes Recht (z.B. Straf-, Wettbewerbs- und Jugendschutzrecht) zu beachten und keine Rechte Dritter (z.B. Namens-, Marken-, Urheber- und Datenschutzrechte) zu verletzen.<br>
+                            (2)	Der Nutzer verpflichtet sich gegenüber dem Betreiber, dass jedwede Inhalte, die in das Portal eingestellt werden, weder durch ihren Inhalt oder die Form gegen geltendes Recht oder die guten Sitten verstoßen. Das Gleiche gilt für das Setzen von externen Links. Nicht erlaubt ist insbesondere das Verbreiten von Inhalten, die</p>
+                            <ul>
+                                <li>Rassismus
+                                <li>Gewaltverherrlichung und Extremismus irgendwelcher Art</li>
+                                <li>Aufrufe und Anstiftung zu Straftaten und Gesetzesverstößen, Drohungen gegen Leib, Leben oder Eigentum</li>
+                                <li>Hetzen gegen Personen oder Unternehmen</li>
+                                <li>persönlichkeitsverletzende Äußerungen, Verleumdung, Ehrverletzung und üble Nachrede von Nutzern und Dritten sowie Verstöße gegen das Lauterkeitsrecht</li>
+                                <li>urheberrechtsverletzende Inhalte oder andere Verletzungen von Immaterialgüterrechten</li>
+                                <li>sexuelle Belästigung von Nutzerinnen und Nutzern und Dritten</li>
+                                <li>Pornografie</li>
+                                <li>anstößige, sexistische, obszöne, vulgäre, abscheuliche oder ekelerregende Materialien und Ausdrucksweisen</li>
+                            </ul>
+                            <p>darstellen, betreffen oder beinhalten.</p>
+                            <p>(3)	Urheberrechtlich geschützte Inhalte dürfen ohne Zustimmung des jeweiligen Rechteinhabers nur im Rahmen des anwendbaren Zitatrechts wörtlich in Beiträge aufgenommen werden. Zitate sind durch Hervorheben mittels Zitatfunktion und Quellenangabe zu kennzeichnen. Fremdsprachige Zitate sind zusätzlich soweit auf Deutsch zu übersetzen, dass der Inhalt grob ersichtlich ist. Insbesondere nicht korrekt zitierte Beiträge können von den Moderatoren entfernt oder berichtigt werden. Die Verbreitung und/oder öffentliche Wiedergabe von jedweden Inhalten des Portals ohne Einwilligung des Betreibers ist untersagt.</p>
+                            <p><strong>5. Weitere Mitwirkungspflichten des Nutzers</strong></p>
+                            <p>(1)	Der Nutzer darf, ohne ausdrückliche Gestattung des Betreibers, das Portal nur für private Zwecke nutzen und keine Werbung für sich oder Dritte machen. Das bedeutet insbesondere, dass der Nutzer keine Nachrichten werbenden Inhalts ohne eine Einwilligung des Betreibers und des Empfängers verwenden darf (insbesondere: Spam-Nachrichten).<br>
+                            (2)	Für den Fall, dass der Nutzer die Möglichkeit nutzt, Dritte über die Existenz des Portals über die von dem Betreiber bereitgestellte Empfehlungsfunktion zu informieren, hat er sicherzustellen, dass der Dritte mit der Übersendung der werbenden Empfehlungs-E-Mail einverstanden ist. <br>
+                            (3)	Für den Fall, dass die Inhalte Hyperlinks auf Seiten Dritter enthalten, sichert der Nutzer zu, dass er die Berechtigung zur Nutzung des Hyperlinks hat und die Website, auf die verweisen wird („Landingpage“), mit geltendem Recht und Rechten Dritter vereinbar ist.<br>
+                            (4)	Der Nutzer ist verpflichtet, mit den Log-in-Daten sorgfältig umzugehen. Dem Nutzer ist es ausnahmslos untersagt, die Log-in-Daten Dritten mitzuteilen und/oder Dritten den Zugang zu dem Profil unter Umgehung der Log-in-Daten zu ermöglichen.<br>
+                            (5)	Der Nutzer muss jedwede Tätigkeit unterlassen, die geeignet ist, den Betrieb des Portals oder der dahinterstehenden technischen Infrastruktur zu beeinträchtigen und/oder übermäßig zu belasten. Dazu zählen insbesondere:
+                            </p>
+                            <ul>
+                                <li>die Verwendung von Software, Scripten oder Datenbanken in Verbindung mit der Nutzung des Portals;</li>
+                                <li>das automatische Auslesen, Blockieren, Überschreiben, Modifizieren, Kopieren von Daten und/oder sonstigen Inhalten, soweit dies nicht für die ordnungsgemäße Nutzung des Portals erforderlich ist;</li>
+                            </ul>
+                            <p>
+                            (6)	Persönlichkeitsverletzend und deshalb nicht zulässig ist es zudem, die Anonymität anderer Nutzer aufzuheben oder Informationen von anderen Nutzern aus privaten Nachrichten, E-Mails oder Chats bekanntzugeben, die nicht für die Öffentlichkeit bestimmt sind. Nutzer dürfen keine Informationen in ihre Beiträge aufnehmen oder sonst wie bekannt machen, die Aufschluss über die Identität eines anderen Nutzers geben könnten oder die der Nutzer von anderen Nutzern ausschließlich in privaten Nachrichten, E-Mails oder Chats erhalten hat.<br>
+                            (7)	Sollte es bei der Nutzung des Portals oder seiner Funktionalitäten zu Störungen kommen, wird der Nutzer den Betreiber von dieser Störung unverzüglich in Kenntnis setzen. Gleiches gilt, wenn der Nutzer Informationen über von Dritten veröffentlichte Inhalte erlangt, die offensichtlich gegen die geltendes Recht oder Rechte Dritter verstoßen.<br> 
+                            </p>
+                            <p><strong>6. Nutzungsrechte</strong></p>
+                            <p>(1)	Der Nutzer räumt dem Betreiber ein räumlich und zeitlich unbeschränktes, unwiderrufliches auf Dritte übertragbares, nicht exklusives, unentgeltliches Recht ein, die eingestellten Inhalte in dem Online-Angebot zu verwerten. Der Betreiber ist jederzeit berechtigt, die Inhalte zu verwenden, zu bearbeiten und zu verwerten. Das schließt insbesondere das Vervielfältigungsrecht, das Verbreitungsrecht und das Recht der öffentlichen Wiedergabe, insbesondere das Recht der öffentlichen Zugänglichmachung mit ein. Der Nutzer verzichtet auf das Recht zur Urhebernennung. Von dieser Regelung unberührt bleibt die Möglichkeit des Nutzers, Dritten Rechte an eingestellten Inhalten nach bestimmten Lizenzmodellen einzuräumen.<br>
+                            (2)	Sämtliche Rechte an den Inhalten des Portals liegen bei dem Betreiber. Dem Nutzer ist die Vervielfältigung, Verbreitung und/oder Veröffentlichung von Inhalten untersagt, die der Betreiber, andere Nutzer oder Dritte in das Portal eingestellt haben.</p>
+                            <p><strong>7. Haftung</strong></p>
+                            <p>(1)	Unbeschränkte Haftung: Der Betreiber haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie nach Maßgabe des Produkthaftungsgesetzes. Für leichte Fahrlässigkeit haftet der Betreiber bei Schäden aus der Verletzung des Lebens, des Körpers und der Gesundheit von Personen. <br>
+                            (2)	Im Übrigen gilt folgende beschränkte Haftung: Bei leichter Fahrlässigkeit haftet der Betreiber nur im Falle der Verletzung einer wesentlichen Vertragspflicht, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Nutzer regelmäßig vertrauen darf (Kardinalpflicht). Die Haftung für leichte Fahrlässigkeit ist der Höhe nach beschränkt auf die bei Vertragsschluss vorhersehbaren Schäden, mit deren Entstehung typischerweise gerechnet werden muss. Diese Haftungsbeschränkung gilt auch zugunsten der Erfüllungsgehilfen des Betreibers.</p>
+                            <p><strong>8. Freistellungsanspruch</strong></p>
+                            <p>Der Nutzer stellt den Betreiber und seine Mitarbeiter bzw. Beauftragten für den Fall der Inanspruchnahme wegen vermeintlicher oder tatsächlicher Rechtsverletzung und/oder Verletzung von Rechten Dritter durch von dem Nutzer im Zusammenhang mit der Nutzung des Portals vorgenommenen Handlungen von sämtlichen sich daraus ergebenen Ansprüchen Dritter frei. Darüber hinaus verpflichtet sich der Nutzer, alle Kosten zu ersetzen, die dem Betreiber durch die Inanspruchnahme durch Dritte entstehen. Zu den erstattungsfähigen Kosten zählen auch die Kosten einer angemessenen Rechtsverteidigung.</p>
+                            <p><strong>9. Personenbezogene Daten</strong></p>
+                            <p>(1) Der Nutzer willigt hiermit in die Speicherung der von ihm eingegebenen personenbezogenen Daten ein. Dies gilt auch für die Speicherung der IP-Adressen, die bei jeder Nutzung des Portals übermittelt werden. Der Nutzer willigt insbesondere auch in die Darstellung der von ihm eingegebenen personenbezogenen Daten in seiner Profildarstellung innerhalb des Portals für andere Nutzer des Portals und Dritte ein, die nicht Nutzer des Portals sind.<br>
+                            (2)	Der Nutzer willigt auch in die Nutzung seiner personenbezogenen Daten für die Personalisierung von in dem Portal geschalteten Werbeanzeigen ein (eine Weitergabe personenbezogener Daten an die Werbetreibenden erfolgt nicht). Der Nutzer ist ferner damit einverstanden, dass Werbeanzeigen Dritter, gleich welcher Art, auf seinen Profilseiten geschaltet werden.<br>
+                            (3)	Die Nutzung des Portals macht die Erhebung, Verarbeitung und Nutzung personenbezogener Daten durch den Betreiber unumgänglich. Der Betreiber versichert, alle gespeicherten Daten sorgsam zu behandeln und ausschließlich im Rahmen der datenschutzrechtlichen Einwilligungen des Nutzers zu verarbeiten. Eine darüber hinausgehende Nutzung personenbezogener Daten erfolgt durch den Betreiber nur, sofern dies gesetzlich zulässig ist oder der Nutzer vorab eingewilligt hat.<br>
+                            (4)	Der Nutzer erklärt sich ferner damit einverstanden, dass der Betreiber personenbezogene Daten des Nutzers für Direktmarketingzwecke benutzt. Dazu zählt die werbliche Ansprache des Nutzers per E-Mail und per Post.</p>
+                            <p><strong>10. Vertragsdauer/Kündigung</strong></p>
+                            <p>(1)	Der Vertrag läuft auf unbestimmte Zeit und kann von beiden Seiten jederzeit ohne Einhaltung einer Kündigungsfrist und Angabe von Gründen gekündigt werden.<br>
+                            (2)	Daneben und darüber hinaus bleibt das Recht der Parteien, das Vertragsverhältnis durch außerordentliche Kündigung aus wichtigem Grund zu beenden, unbenommen.<br>
+                            (3)	Für den Betreiber liegt ein wichtiger Grund zur Kündigung dieses Vertrages vor, wenn der Kunde seine Verpflichtungen nach Ziff. 4 oder 5 dieses Vertrages nachhaltig verletzt.</p>
+                            <p><strong>11. Schlussbestimmungen</strong></p>
+                            <p>(1)	Sollte der Vertrag unwirksame Regelungen enthalten, bleibt die Wirksamkeit des Vertrages im Übrigen unberührt.<br>
+                            (2)	Auf den vorliegenden Vertrag ist ausschließlich deutsches Recht anwendbar.</p><br>
+                        </p>
+                    </div>
+                    <div id="privacy" style="margin-bottom: 168px;"></div>
+                    <div class="terms">
+                        <h1>Datenschutzerklärung</h1>
+                        <p><strong>Allgemeiner Hinweis und Pflichtinformationen</strong></p>
+                        <p><strong>Benennung der verantwortlichen Stelle</strong></p>
+                        <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+                        <p><span id="s3-t-firma">Codex</span><br><span id="s3-t-ansprechpartner">APRG MS2 WiSe 2020 - Team C</span><br><span id="s3-t-strasse">Finkenau 35</span><br><span id="s3-t-plz">22081</span> <span id="s3-t-ort">Hamburg</span></p><p>
+                        <p>Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).</p>
+
+                        <p><strong>Widerruf Ihrer Einwilligung zur Datenverarbeitung</strong></p>
+                        <p>Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p>
+
+                        <p><strong>Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde</strong></p>
+                        <p>Als Betroffener steht Ihnen im Falle eines datenschutzrechtlichen Verstoßes ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde bezüglich datenschutzrechtlicher Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem sich der Sitz unseres Unternehmens befindet. Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
+
+                        <p><strong>Recht auf Datenübertragbarkeit</strong></p>
+                        <p>Ihnen steht das Recht zu, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an Dritte aushändigen zu lassen. Die Bereitstellung erfolgt in einem maschinenlesbaren Format. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.</p>
+
+                        <p><strong>Recht auf Auskunft, Berichtigung, Sperrung, Löschung</strong></p>
+                        <p>Sie haben jederzeit im Rahmen der geltenden gesetzlichen Bestimmungen das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, Herkunft der Daten, deren Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Diesbezüglich und auch zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit über die im Impressum aufgeführten Kontaktmöglichkeiten an uns wenden.</p>
+
+                        <p><strong>SSL- bzw. TLS-Verschlüsselung</strong></p>
+                        <p>Aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, die Sie an uns als Seitenbetreiber senden, nutzt unsere Website eine SSL-bzw. TLS-Verschlüsselung. Damit sind Daten, die Sie über diese Website übermitteln, für Dritte nicht mitlesbar. Sie erkennen eine verschlüsselte Verbindung an der „https://“ Adresszeile Ihres Browsers und am Schloss-Symbol in der Browserzeile.</p>
+
+                        <p><strong>Speicherdauer von Beiträgen und Kommentaren</strong></p>
+                        <p>Beiträge und Kommentare sowie damit in Verbindung stehende Daten, wie beispielsweise IP-Adressen, werden gespeichert. Der Inhalt verbleibt auf unserer Website, bis er vollständig gelöscht wurde oder aus rechtlichen Gründen gelöscht werden musste.</p>
+                        <p>Die Speicherung der Beiträge und Kommentare erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die
+                            Rechtmäßigkeit bereits erfolgter Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.</p>
+                                    
+                        <p><strong>Cookies</strong></p>
+                        <p>Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. </p>
+                        <p>Einige Cookies sind “Session-Cookies.” Solche Cookies werden nach Ende Ihrer Browser-Sitzung von selbst gelöscht. Hingegen bleiben andere Cookies auf Ihrem Endgerät bestehen, bis Sie diese selbst löschen. Solche Cookies helfen uns, Sie bei Rückkehr auf
+                            unserer Website wiederzuerkennen.</p>
+                        <p>Mit einem modernen Webbrowser können Sie das Setzen von Cookies überwachen, einschränken oder unterbinden. Viele Webbrowser lassen sich so konfigurieren, dass Cookies mit dem Schließen des Programms von selbst gelöscht werden. Die Deaktivierung von Cookies
+                            kann eine eingeschränkte Funktionalität unserer Website zur Folge haben.</p>
+                        <p>Das Setzen von Cookies, die zur Ausübung elektronischer Kommunikationsvorgänge oder der Bereitstellung bestimmter, von Ihnen erwünschter Funktionen (z.B. Warenkorb) notwendig sind, erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Als Betreiber dieser
+                            Website haben wir ein berechtigtes Interesse an der Speicherung von Cookies zur technisch fehlerfreien und reibungslosen Bereitstellung unserer Dienste. Sofern die Setzung anderer Cookies (z.B. für Analyse-Funktionen) erfolgt, werden diese in dieser
+                            Datenschutzerklärung separat behandelt.</p>
+                                    
+                        <p><strong>Google Web Fonts</strong></p>
+                        <p>Unsere Website verwendet Web Fonts von Google. Anbieter ist die Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.</p>
+                        <p>Durch den Einsatz dieser Web Fonts wird es möglich Ihnen die von uns gewünschte Darstellung unserer Website zu präsentieren, unabhängig davon welche Schriften Ihnen lokal zur Verfügung stehen. Dies erfolgt über den Abruf der Google Web Fonts von einem Server von Google in den USA und der damit verbundenen Weitergabe Ihre Daten an Google. Dabei handelt es sich um Ihre IP-Adresse und welche Seite Sie bei uns besucht haben. Der Einsatz von Google Web Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Als Betreiber dieser Website haben wir ein berechtigtes Interesse an der optimalen Darstellung und Übertragung unseres Webauftritts.</p>
+                        <p>Das Unternehmen Google ist für das us-europäische Datenschutzübereinkommen "Privacy Shield" zertifiziert. Dieses Datenschutzübereinkommen soll die Einhaltung des in der EU geltenden Datenschutzniveaus gewährleisten.</p>
+                        <p>Einzelheiten über Google Web Fonts finden Sie unter: <a href="https://www.google.com/fonts#AboutPlace:about">https://www.google.com/fonts#AboutPlace:about</a> und weitere Informationen in den Datenschutzbestimmungen von Google: <a href="https://policies.google.com/privacy/partners?hl=de">https://policies.google.com/privacy/partners?hl=de</a></p>
+                        <p><span style="font-size: 10px;">Quelle: Datenschutz-Konfigurator von <a href="http://www.mein-datenschutzbeauftragter.de" target="_blank">mein-datenschutzbeauftragter.de</a></small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Info-Box -->
+        <div class="parallax-infobox">
+            <div class="inner" style="align-items: flex-start; background-color: transparent; padding-top: 35px;">
+                <div style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/code-icon.svg" alt="Code-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Code speichern.</h2>
+                    <p class="infotext">
+                        Speichere deine besten Code-Snippets, um bei ähnlichen Problemen gleich eine Lösung parat zu haben!</p>
+                </div>
+                <div style="text-align: center; padding: 5px; width: 295px;">
+                    <img src="/img/comment-icon.svg" alt="Comment-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Sich austauschen.</h2>
+                    <p class="infotext">Tausche dich mit Nutzer:innen aus, diskutiere über Code, erhalte Vorschläge oder hilf anderen beim Optimieren!</p>
+                </div>
+                <div style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/learn-icon.svg" alt="Learn-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Neues lernen.</h2>
+                    <p class="infotext">Stöbere in Sammlungen anderer, finde Inspiration fürs nächste Projekt oder lerne neue Coding-Wege kennen!</p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

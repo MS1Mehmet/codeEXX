@@ -1,0 +1,54 @@
+<!-- HTML-Vorlage mit Navigation oben und Footer -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="/stylesheet.css">
+        
+        <!-- Meta-Daten -->
+        <title>Codex - SEITENTITEL</title>
+    </head>
+    <body>
+        <div class="inner">
+            <!-- Navigation & Website-Header -->
+            <div class="navigation-container">
+                <div class="inner-nav">
+                    <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                    <!-- hier wird unterschieden zwischen angemeldetem und anonymem Benutzer-->
+                    <% if (session == null) { %> <!-- ist die Session = null wird die normale Navi angezeigt -->
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/login">Login</a></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/register">Register</a></div>
+                    <% } else { %>               <!-- ist die Session != null wird der angemeldete Zustand der Session angezeigt -->
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/my-profile">My Snippets</a></div>
+                    <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+                    <% } %>
+                </div>
+            </div>
+            <div style="margin-top: 109px;"></div>
+            <!-- ### HIERUNTER NEUE INHALTE EINFÜGEN ### -->
+            <div style="margin-left: 25px;"> <!-- DIVs sind leere Container-Objekte, die "gestyled" werden können (z.B. Position ändern o.ä.) -->
+                <h1>Headline 1</h1>
+                <h2>Headline 2</h2>
+                <h3>Headline 3</h3>
+                <p>Textabsatz</p>
+                <a href="/welcome">Link</a>
+            </div>          
+            <!-- Footer -->
+            <div style="margin-bottom: 50px;"></div>
+            <div class="footer-container">
+                <p class="footer">© 2020 CODEX &nbsp;
+                    <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

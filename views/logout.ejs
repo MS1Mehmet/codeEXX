@@ -1,0 +1,68 @@
+<!-- Logout Confirmation -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+        
+        <!-- Meta-Daten -->
+        <title>Codex - Logout</title>
+        <meta http-equiv="refresh" content="3; URL=/welcome">
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/login">Login</a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/register">Register</a></div>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Logout-Nachricht -->
+        <div class="flex-container" style="min-height: 400px;">
+            <div style="padding: 25px 75px 75px 75px;">
+                <h1>Erfolgreich abgemeldet...!</h1>
+                <p><b>Bitte warte einen kleinen Moment. Du wirst in 3 Sekunden weitergeleitet...</b><br>
+                        Sollte die Weiterleitung nicht funktionieren, <a href="/welcome">klicke bitte hier.</a></p>
+            </div>
+        </div>
+        <!-- Info-Box -->
+        <div class="parallax-infobox">
+            <div class="inner" style="align-items: flex-start; background-color: transparent; padding-top: 35px;">
+                <div style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/code-icon.svg" alt="Code-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Code speichern.</h2>
+                    <p class="infotext">
+                        Speichere deine besten Code-Snippets, um bei ähnlichen Problemen gleich eine Lösung parat zu haben!</p>
+                </div>
+                <div style="text-align: center; padding: 5px; width: 295px;">
+                    <img src="/img/comment-icon.svg" alt="Comment-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Sich austauschen.</h2>
+                    <p class="infotext">Tausche dich mit Nutzer:innen aus, diskutiere über Code, erhalte Vorschläge oder hilf anderen beim Optimieren!</p>
+                </div>
+                <div style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/learn-icon.svg" alt="Learn-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Neues lernen.</h2>
+                    <p class="infotext">Stöbere in Sammlungen anderer, finde Inspiration fürs nächste Projekt oder lerne neue Coding-Wege kennen!</p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>

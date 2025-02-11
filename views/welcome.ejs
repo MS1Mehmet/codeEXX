@@ -1,0 +1,112 @@
+<!-- Startseite Codex -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Favicon Browser -->
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+        
+        <!-- Einbinden von Google-Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+        
+        <!-- Laden des CSS-Stylesheets -->
+        <link rel="stylesheet" href="<%=stylesheet%>">
+
+        <!-- Laden von ScrollReveal -->
+        <script src="https://unpkg.com/scrollreveal"></script>
+        
+        <!-- Meta-Daten -->
+        <title>Codex - Welcome!</title>
+    </head>
+    <body>
+        <!-- Navigation & Website-Header -->
+        <div class="navigation-container">
+            <div class="inner-nav">
+                <div><a href="/welcome"><img src="/img/logo.svg" alt="Codex Logo" style="height: 65px;"></img></a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 10;"></div>
+                <!-- hier wird unterschieden zwischen angemeldetem und anonymem Benutzer-->
+                <% if (session == null) { %> <!-- ist die Session = null wird die normale Navi angezeigt -->
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/login">Login</a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/register">Register</a></div>
+                <% } else { %>               <!-- ist die Session != null wird der angemeldete Zustand der Session angezeigt -->
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/my-profile">Profile</a></div>
+                <div class="nav-button-top" style="height: 60px; flex-grow: 1;"><a href="/logout">Logout</a></div>
+                <% } %>
+            </div>
+        </div>
+        <div style="margin-top: 109px;"></div>
+        <!-- Maxiteaser -->
+        <div class="parallax-maxiteaser">
+            <div class="inner" style="justify-content: flex-start; flex-direction: column; align-items: flex-start; background-color: transparent;">
+                <img src="/img/teaser-text.svg" id="teaser-text" alt ="Welcome to Codex. Exchange. Explore. Evolve." style="width: 75%; margin-top: 10%; margin-bottom: 2%;"></img><br>
+                <a href="/register" id="teaser-button" class="cta-button" style="font-size: 14px; margin-bottom: 5%;">>&nbsp;START&nbsp;NOW</a>
+            </div>
+        </div>
+        <!-- Einleitung -->
+        <div class="flex-container" style="align-items: center; min-height: 350px;">
+            <div class="inner" style="justify-content: space-between;">
+                <div style="width: 50%">
+                    <h1><span style="font-weight: 400;">Mit </span>
+                    Codex <span style="font-weight: 400;">sammelst du deinen Lieblings-Code!</span></h1>
+                    <p>In nur einer Minute legst du dein eigenes Profil an und speicherst dein erstes Code-Snippet in deiner Sammlung!</p>                
+                    <a href="/register" class="cta-button">JETZT&nbsp;REGISTRIEREN</a>
+                </div>
+                <div>
+                    <img src="/img/macbook.jpg" alt="Macbook mit Codex-Screen" style="width: 354px"></img>
+                </div>
+            </div>
+        </div>
+        <!-- Info-Box -->
+        <div class="parallax-infobox">
+            <div class="inner" style="align-items: flex-start; background-color: transparent; padding-top: 35px;">
+                <div id="inf1" style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/code-icon.svg" alt="Code-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Code speichern.</h2>
+                    <p class="infotext">
+                        Speichere deine besten Code-Snippets, um bei ähnlichen Problemen gleich eine Lösung parat zu haben!</p>
+                </div>
+                <div id="inf2" style="text-align: center; padding: 5px; width: 295px;">
+                    <img src="/img/comment-icon.svg" alt="Comment-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Sich austauschen.</h2>
+                    <p class="infotext">Tausche dich mit Nutzer:innen aus, diskutiere über Code, erhalte Vorschläge oder hilf anderen beim Optimieren!</p>
+                </div>
+                <div id="inf3" style="text-align: center; padding: 5px;  width: 295px;">
+                    <img src="/img/learn-icon.svg" alt="Learn-Icon" style="height: 115px;"></img><br>
+                    <h2 style="color: white;">Neues lernen.</h2>
+                    <p class="infotext">Stöbere in Sammlungen anderer, finde Inspiration fürs nächste Projekt oder lerne neue Coding-Wege kennen!</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            ScrollReveal({ reset: false }).reveal('#teaser-text', { delay: 000, duration: 2000 });
+            ScrollReveal({ reset: false, origin: 'bottom' }).reveal('#teaser-button', { delay: 1250, scale: 0.75 });
+            ScrollReveal({ reset: false, distance: '120%', origin: 'right' }).reveal('#inf1', { delay: 0, viewFactor: 0.5 });
+            ScrollReveal({ reset: false, distance: '120%', origin: 'right' }).reveal('#inf2', { delay: 500, viewFactor: 0.5 });
+            ScrollReveal({ reset: false, distance: '120%', origin: 'right' }).reveal('#inf3', { delay: 1000, viewFactor: 0.5 });
+        </script>
+        <!-- Was ist Codex -->
+        <div class="flex-container">
+            <div class="inner" style="align-items: flex-start; justify-content: flex-start; background-color: transparent; padding-top: 35px;">
+                <h3 style="width: 250px;">Was ist CODEX?</h3>
+                <p><b>Codex</b> ist eine Plattform, die es dir ermöglicht deine besten Code-Snippets in deinem 
+                    eigenen Profil (deiner Code-Sammlung) zu speichern. Statt bei ähnlichen Problemen immer 
+                    und immer wieder das Internet nach einem passenden Lösungsweg zu durchsuchen, alte 
+                    Projekte zu durchforsten oder stundenlang über Code zu brüten, hast du mit <b>Codex</b> deine 
+                    wichtige Code-Sammlung immer dabei.
+                    Durchsuche dabei auch Profile anderer Nutzer:innen, tausch dich mit ihnen aus, gib 
+                    Verbesserungsvorschläge oder erhalte selbst Ideen zur Optimierung deines Codes. 
+                    Gefällt dir, was du siehst, speichere Code-Snippets von anderen einfach in deinen Favoriten.
+                    Mit <b>Codex</b> sparst du also nicht nur viel Zeit, sondern lernst gleichzeitig viel Neues!</p>
+            </div>
+            
+        </div>
+        <!-- Footer -->
+        <div style="margin-bottom: 50px;"></div>
+        <div class="footer-container">
+            <p class="footer">© 2020 CODEX &nbsp;
+                <a href="/impressum">Impressum</a> | <a href="/impressum#privacy">Datenschutz</a>
+            </p>
+        </div>
+    </body>
+</html>
